@@ -4,7 +4,7 @@ var fs = require('fs');
 var access_token;
 var instance_url = 'na8.salesforce.com'; //need to auto update
 var response;
-var api = '22.0';
+var api = '21.0';
 var data;
 	
 var callBackFunction;
