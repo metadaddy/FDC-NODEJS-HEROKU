@@ -2,7 +2,7 @@ var https = require('https');
 var fs = require('fs');
 
 var access_token;
-var instance_url = '{USER INSTANCE URL}'; //need to auto update
+var instance_url = 'https://na8.salesforce.com/'; //need to auto update
 var response;
 var api = '22.0';
 var data;
