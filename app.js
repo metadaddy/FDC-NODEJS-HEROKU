@@ -10,8 +10,8 @@ var port = 8870;
 
 
 var options = {
-  key: fs.readFileSync('../privatekey.pem'),
-  cert: fs.readFileSync('../certificate.pem')
+  key: fs.readFileSync('privatekey.pem'),
+  cert: fs.readFileSync('certificate.pem')
 };
 console.log('SSL Configured');
 
