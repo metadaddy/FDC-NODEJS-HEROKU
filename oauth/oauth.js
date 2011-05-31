@@ -27,11 +27,11 @@ function getRequestToken(url,_res) {
 
 function redirectUser() {
 	console.log('RESPONSE:::'+oauthResponse);
-//	fs.readFile('views/test.html', function(err, data){
+	fs.readFile('views/test.html', function(err, data){
     	res.setHeader('Set-Cookie', ['refresh_token='+oauthResponse.refresh_token,'access_token='+oauthResponse.access_token]); 
-    	res.write('Cookie Written?');  
+    	res.write(data);  
     	res.end();
-//  		});
+  		});
 }	
 
 
