@@ -3,6 +3,9 @@ var fs = require('fs');
 var url = require('url');
 var server;
 
+var http = require('http');
+var httpServer;
+
 var oauth = require('./oauth');
 var rest = require('./rest');
 
@@ -15,7 +18,22 @@ var options = {
 };
 console.log('SSL Configured');
 
-server = https.createServer(options, function (req, res) {
+//fallback?
+server = http.createServer(function(req, res) {
+/*	fs.readFile('views/ssl.html', function(err, data){
+    	res.writeHead(200, {'Content-Type':'text/html'});  
+    	res.write(data);  
+    	res.end();
+  		});
+	
+	}
+	
+	);
+	
+httpServer.listen(port); 
+
+//server = https.createServer(options, function (req, res) {
+*/
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
 
