@@ -3,9 +3,9 @@ var https = require('https');
 var fs = require('fs');
 var res;
 
-var publicKey = '{PUBLICKEY}';
-var privateKey = '{PRIVATEKEY}';
-var callbackURI = '{CALLBACK}';
+var publicKey = '3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7';
+var privateKey = '6924647006748897156';
+var callbackURI = 'https://smooth-dawn-328.herokuapp.com/token';
 var oauthURL = 'https://login.salesforce.com/services/oauth2/authorize?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
 var requestToken;
 var oauthResponse = '';
