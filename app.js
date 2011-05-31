@@ -6,7 +6,7 @@ var server;
 var oauth = require('./oauth');
 var rest = require('./rest');
 
-var port = 8870;
+var port = 5000;
 
 
 var options = {
