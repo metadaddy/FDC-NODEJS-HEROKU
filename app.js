@@ -1,7 +1,6 @@
 var https = require('https');
 var fs = require('fs');
 var url = require('url');
-var io = require('socket.io');
 var server;
 
 var oauth = require('./oauth');
@@ -102,7 +101,4 @@ server = https.createServer(options, function (req, res) {
 server.listen(port);
 console.log('SSL Listening on '+port);
 
-
-var io = io.listen(server)
-  , buffer = [];
  
