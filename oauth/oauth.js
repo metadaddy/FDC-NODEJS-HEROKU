@@ -29,7 +29,7 @@ function redirectUser() {
 	console.log('RESPONSE:::'+oauthResponse);
 	fs.readFile('views/filter.html', function(err, data){
     	res.setHeader('Set-Cookie', ['refresh_token='+oauthResponse.refresh_token,'access_token='+oauthResponse.access_token]); 
-    //	res.write('Cookie Written?');  
+    	res.write(data);  
     	res.end();
   		});
 }	
