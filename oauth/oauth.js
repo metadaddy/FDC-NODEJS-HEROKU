@@ -3,10 +3,10 @@ var https = require('https');
 var fs = require('fs');
 var res;
 
-var publicKey = '3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7';
-var privateKey = '6924647006748897156';
-var callbackURI = 'https://smooth-dawn-328.herokuapp.com/token';
-var oauthURL = 'https://login.salesforce.com/services/oauth2/authorize?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
+var publicKey = '3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt';
+var privateKey = '5722795279005913741';
+var callbackURI = 'https://ec2-75-101-217-96.compute-1.amazonaws.com:8870/token';
+var oauthURL = 'https://prerellogin.pre.salesforce.com/services/oauth2/authorize?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
 var requestToken;
 var oauthResponse = '';
 
@@ -27,11 +27,11 @@ function getRequestToken(url,_res) {
 
 function redirectUser() {
 	console.log('RESPONSE:::'+oauthResponse);
-	fs.readFile('views/test.html', function(err, data){
+//	fs.readFile('views/test.html', function(err, data){
     	res.setHeader('Set-Cookie', ['refresh_token='+oauthResponse.refresh_token,'access_token='+oauthResponse.access_token]); 
-    	res.write(data);  
+    	res.write('Cookie Written?');  
     	res.end();
-  		});
+//  		});
 }	
 
 
@@ -45,11 +45,11 @@ function getAccessToken(token) {
 	console.log(privateKey);
 	
 	var options = {
-		host: 'login.salesforce.com',
+		host: 'prerellogin.pre.salesforce.com',
 		path: '/services/oauth2/token',
 		method: 'POST',
 		headers: {
-			'host': 'login.salesforce.com',
+			'host': 'prerellogin.pre.salesforce.com',
 			'Content-Length': post_data.length,
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'Accept':'application/jsonrequest',
