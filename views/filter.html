@@ -7,13 +7,17 @@
 
 <script>
 function getResults() {
+ var spin = $('#spinfilter').val();
+ var mass = $('#massfilter').val();
+ 
+
  $.ajaxSetup({
  
  	async: true,
  	cache: false,
  	dataType: "json",
  	success: showResults,
- 	url: "/execute/QuarkControl?spin="+$('#spinfilter').val()+"&mass="+$('#massfilter').val()
+ 	url: "/execute/QuarkControl?spin="+spin+"&mass="+mass
  
  	});
 
