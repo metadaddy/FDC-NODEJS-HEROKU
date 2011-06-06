@@ -5,7 +5,7 @@ var res;
 
 var publicKey = '3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt';
 var privateKey = '5722795279005913741';
-var callbackURI = 'https://ec2-75-101-217-96.compute-1.amazonaws.com:8870/token';
+var callbackURI = 'https://smooth-dawn-328.herokuapp.com/token';
 var oauthURL = 'https://prerellogin.pre.salesforce.com/services/oauth2/authorize?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
 var requestToken;
 var oauthResponse = '';
