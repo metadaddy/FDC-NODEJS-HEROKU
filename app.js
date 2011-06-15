@@ -8,6 +8,10 @@ var httpServer;
 var oauth = require('./oauth');
 var rest = require('./rest');
 
+oauth.setKeys('3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt','5722795279005913741');
+oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
+oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
+
 var port = process.env.PORT || 3000;
 
 
@@ -37,7 +41,7 @@ server = http.createServer(function(req, res) {
   //RESTful API
   
   else if(req.url == '/login') {
-  	if(1 == 2) {
+  	if(1 == 2) { //todo (obviously) correct cookie checking here
   		oauth.setOAuth(cookies.access_token);
   		fs.readFile('views/test.html', function(err, data){
     	res.writeHead(200, {'Content-Type':'text/html'});  

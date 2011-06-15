@@ -3,12 +3,19 @@ var https = require('https');
 var fs = require('fs');
 var res;
 
-var publicKey = '3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt';
-var privateKey = '5722795279005913741';
-var callbackURI = 'https://smooth-dawn-328.herokuapp.com/token';
-var oauthURL = 'https://prerellogin.pre.salesforce.com/services/oauth2/authorize?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
+var publicKey = '';
+var privateKey = '';
+
+var callbackURI = ''; //typically your URL + '/token';
+var callbackFile = 'views/index.html';
+
+var oauthPrefix = 'https://login.salesforce.com/services/oauth2/authorize'; //typically https://login.salesforce.com/services/oauth2/authorize
+var oauthURL = '?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
+var hostname = 'login.salesforce.com'; //typically login.salesforce.com
+
+
 var requestToken;
-var oauthResponse = '';
+var oauthResponse;
 
 function getToken() { return requestToken; }
 function getOAuth() { return oauthResponse; }
@@ -16,6 +23,22 @@ function getOAuth() { return oauthResponse; }
 function setOAuth(oauth) {
 	oauthResponse = {access_token: oauth};
 }
+
+function setKeys(public,private) {
+	publicKey = public;
+	privateKey = private;
+}
+
+function setCallback(uri,filename) {
+	callbackURI = uri;
+	callbackFile = filename;
+}
+
+function setHost(oauth,host) {
+	oauthPrefix = oauth;
+	hostname = host;
+}
+
 
 function getRequestToken(url,_res) {
 	res = _res;
@@ -27,7 +50,7 @@ function getRequestToken(url,_res) {
 
 function redirectUser() {
 	console.log('RESPONSE:::'+oauthResponse);
-	fs.readFile('views/filter.html', function(err, data){
+	fs.readFile(callbackFile, function(err, data){
     	res.setHeader('Set-Cookie', ['refresh_token='+oauthResponse.refresh_token,'access_token='+oauthResponse.access_token]); 
     	res.write(data);  
     	res.end();
@@ -45,11 +68,11 @@ function getAccessToken(token) {
 	console.log(privateKey);
 	
 	var options = {
-		host: 'prerellogin.pre.salesforce.com',
+		host: hostname,
 		path: '/services/oauth2/token',
 		method: 'POST',
 		headers: {
-			'host': 'prerellogin.pre.salesforce.com',
+			'host': hostname,
 			'Content-Length': post_data.length,
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'Accept':'application/jsonrequest',
@@ -85,5 +108,8 @@ module.exports = {
  getToken: getToken,
  getOAuth: getOAuth,
  setOAuth: setOAuth,
- getAccessToken: getAccessToken
+ getAccessToken: getAccessToken,
+ setKeys: setKeys,
+ setCallback: setCallback,
+ setHost: setHost
  };
