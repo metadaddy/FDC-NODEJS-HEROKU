@@ -2,7 +2,7 @@ var http = require('https');
 var fs = require('fs');
 
 var access_token;
-var instance_url = 'login.salesforce.com';
+var instance_url = 'na8.salesforce.com';
 var response;
 var api = '22.0';
 var data;
@@ -95,7 +95,7 @@ function query(soql,token,_res) {
 		 	});
 		
 		  res.on('end', function(d) {
-		  	console.log("END"+data);
+		  //	console.log("END"+data);
 		  	redirectUser(res);
 		  	});
 		

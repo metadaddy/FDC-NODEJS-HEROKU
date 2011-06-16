@@ -2,15 +2,18 @@ var fs = require('fs');
 var url = require('url');
 var server;
 
-var http = require('http');
+var http;
 var httpServer;
+var port = process.env.PORT || 3000;
 
 var oauth = require('./oauth');
 var rest = require('./rest');
 
 //oauth.setKeys('3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt','5722795279005913741');
 oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7','6924647006748897156');
-oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
+//oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
+oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
+
 //oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
 
 /*
@@ -18,11 +21,29 @@ oauth.setKeys('PUBLICKEY','PRIVATEKEY');
 oauth.setCallback('https://YOURHEROKUDOMAIN/token','YOURCALLBACKPAGE');
 */
 
-var port = process.env.PORT || 3000;
+if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL
+	http = require('https');
+	var options = {
+  		key: fs.readFileSync('../privatekey.pem'),
+  		cert: fs.readFileSync('../certificate.pem')
+	};
+	console.log('SSL Configured');
+	
+	server = http.createServer(options,RESTHandler);
+} else {
+	http = require('http');
+	server = http.createServer(RESTHandler);
+	console.log('HTTP Configured');
+}
+  
+server.listen(port);
+console.log('REST Listening on '+port);
 
 
-//fallback?
-server = http.createServer(function(req, res) {
+
+
+//RESTful API router
+function RESTHandler (req, res) {
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
 
@@ -47,20 +68,20 @@ server = http.createServer(function(req, res) {
   //RESTful API
   
   else if(req.url == '/login') {
-  /*	if(1 == 2) { //todo (obviously) correct cookie checking here
+  	if(cookies.access_token != null) { 
   		oauth.setOAuth(cookies.access_token);
-  		fs.readFile('views/test.html', function(err, data){
+  		fs.readFile(oauth.getCallbackFile(), function(err, data){
     	res.writeHead(200, {'Content-Type':'text/html'});  
     	res.write(data);  
     	res.end();
   		});
-  	} else { */
+  	} else { 
   	 
   	    console.log('Logging In with OAuth');
   		console.log(oauth.getLoginUrl());
   		res.writeHead(301, {'Location' : oauth.getLoginUrl(), 'Cache-Control':'no-cache,no-store,must-revalidate'});
   		res.end();
-  //	}
+  	}
   }
   else if(req.url.indexOf('/token') >= 0) {
   	oauth.getRequestToken(req.url,res);
@@ -106,9 +127,6 @@ server = http.createServer(function(req, res) {
   		});
   }
   		
-  });
-  
-server.listen(port);
-console.log('SSL Listening on '+port);
+  }
 
  
