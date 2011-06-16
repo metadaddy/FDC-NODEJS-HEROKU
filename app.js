@@ -58,7 +58,7 @@ server = http.createServer(function(req, res) {
   	 
   	    console.log('Logging In with OAuth');
   		console.log(oauth.getLoginUrl());
-  		res.writeHead(302, {'Location' : oauth.getLoginUrl()});
+  		res.writeHead(307, {'Location' : oauth.getLoginUrl()});
   		res.end();
   //	}
   }
