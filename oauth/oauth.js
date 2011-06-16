@@ -24,14 +24,21 @@ function setOAuth(oauth) {
 	oauthResponse = {access_token: oauth};
 }
 
+function getLoginUrl() {
+	return oauthURL;
+}
+
 function setKeys(public,private) {
 	publicKey = public;
 	privateKey = private;
+	setHost(oauthPrefix,hostname);
+	console.log(oauthURL);
 }
 
 function setCallback(uri,filename) {
 	callbackURI = uri;
 	callbackFile = filename;
+	setHost(oauthPrefix,hostname);
 }
 
 function setHost(oauth,host) {
@@ -109,6 +116,7 @@ module.exports = {
  getToken: getToken,
  getOAuth: getOAuth,
  setOAuth: setOAuth,
+ getLoginUrl: getLoginUrl,
  getAccessToken: getAccessToken,
  setKeys: setKeys,
  setCallback: setCallback,

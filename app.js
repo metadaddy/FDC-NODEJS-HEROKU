@@ -50,7 +50,8 @@ server = http.createServer(function(req, res) {
     	res.end();
   		});
   	} else {
-  		res.writeHead(301, {'Location' : oauth.oauthURL});
+  		console.log(oauth.getLoginUrl());
+  		res.writeHead(301, {'Location' : oauth.getLoginUrl()});
   		res.end();
   	}
   }
