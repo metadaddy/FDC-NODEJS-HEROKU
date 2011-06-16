@@ -58,6 +58,9 @@ function getRequestToken(url,_res) {
 
 function redirectUser() {
 	console.log('RESPONSE:::'+oauthResponse);
+	console.log('RESPONSE:::'+oauthResponse.access_token);
+	console.log('RESPONSE:::'+oauthResponse.message);
+	
 	fs.readFile(callbackFile, function(err, data){
     	res.setHeader('Set-Cookie', ['refresh_token='+oauthResponse.refresh_token,'access_token='+oauthResponse.access_token]); 
     	res.write(data);  
