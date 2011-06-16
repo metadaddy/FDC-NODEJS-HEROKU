@@ -11,8 +11,8 @@ var rest = require('./rest');
 
 //oauth.setKeys('3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt','5722795279005913741');
 oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7','6924647006748897156');
-//oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
-oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
+oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
+//oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
 
 //oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
 
