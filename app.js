@@ -42,18 +42,18 @@ server = http.createServer(function(req, res) {
   //RESTful API
   
   else if(req.url == '/login') {
-  	if(1 == 2) { //todo (obviously) correct cookie checking here
+  /*	if(1 == 2) { //todo (obviously) correct cookie checking here
   		oauth.setOAuth(cookies.access_token);
   		fs.readFile('views/test.html', function(err, data){
     	res.writeHead(200, {'Content-Type':'text/html'});  
     	res.write(data);  
     	res.end();
   		});
-  	} else {
+  	} else { */
   		console.log(oauth.getLoginUrl());
   		res.writeHead(301, {'Location' : oauth.getLoginUrl()});
   		res.end();
-  	}
+  //	}
   }
   else if(req.url.indexOf('/token') >= 0) {
   	oauth.getRequestToken(req.url,res);
