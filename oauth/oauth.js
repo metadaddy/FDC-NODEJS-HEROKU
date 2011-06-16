@@ -94,6 +94,7 @@ function getAccessToken(token) {
 		
 		  res.on('data', function(data) {
 		    oauthResponse = JSON.parse(data);
+		    console.log(data);
 		 	});
 		
 		  res.on('end', function(d) {
