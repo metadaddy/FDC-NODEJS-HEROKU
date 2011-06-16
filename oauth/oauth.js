@@ -1,4 +1,4 @@
-var http = require('http');
+var http = require('https');
 var fs = require('fs');
 
 var res;
@@ -97,7 +97,7 @@ function getAccessToken(token) {
 		
 		  res.on('data', function(data) {
 		    oauthResponse = JSON.parse(data);
-		    console.log(data);
+		    console.log("DATA::"+data);
 		 	});
 		
 		  res.on('end', function(d) {
