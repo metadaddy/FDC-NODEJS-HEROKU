@@ -36,6 +36,7 @@ function setCallback(uri,filename) {
 
 function setHost(oauth,host) {
 	oauthPrefix = oauth;
+	oauthURL = oauthPrefix + '?display=touch&response_type=code&client_id='+publicKey+'&redirect_uri='+callbackURI;
 	hostname = host;
 }
 
