@@ -17,7 +17,7 @@ function getResults() {
  	cache: false,
  	dataType: "json",
  	success: showResults,
- 	url: "/execute/QuarkControl?spin="+spin+"&mass="+mass
+ 	url: "/query/SELECT Spin__c,Mass__c FROM Quark__c WHERE Spin__c <= "+spin+" AND Mass__c <= "+mass  //>
  
  	});
 
