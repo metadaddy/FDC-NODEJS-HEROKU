@@ -88,7 +88,7 @@ function getAccessToken(token) {
 		}
 	}
 	
-	var req = https.request(options, function(res) {
+	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
 		  console.log("headers: ", res.headers);
 		

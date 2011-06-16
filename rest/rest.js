@@ -2,7 +2,7 @@ var https = require('https');
 var fs = require('fs');
 
 var access_token;
-var instance_url = 'prerelna1.pre.salesforce.com';
+var instance_url = 'login.salesforce.com';
 var response;
 var api = '22.0';
 var data;
@@ -44,7 +44,7 @@ function execute(endpoint,method,reqData,token,_res){
 		
 	}
 	console.log(options.headers);
-	var req = https.request(options, function(res) {
+	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
 		  console.log("headers: ", res.headers);
 		
@@ -85,7 +85,7 @@ function query(soql,token,_res) {
 		
 	}
 	console.log(options.headers);
-	var req = https.request(options, function(res) {
+	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
 		  console.log("headers: ", res.headers);
 		
@@ -166,7 +166,7 @@ function update(object,id,type,token,_res) {
 		
 	}
 	console.log(options.headers);
-	var req = https.request(options, function(res) {
+	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
 		  console.log("headers: ", res.headers);
 		
@@ -206,7 +206,7 @@ function create(object,type,token,_res) {
 		
 	}
 	console.log(options.headers);
-	var req = https.request(options, function(res) {
+	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
 		  console.log("headers: ", res.headers);
 		
@@ -246,7 +246,7 @@ function deleteObject(id,type,token,_res) {
 		
 	}
 	console.log(options.headers);
-	var req = https.request(options, function(res) {
+	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
 		  console.log("headers: ", res.headers);
 		

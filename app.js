@@ -13,6 +13,11 @@ oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChq
 oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
 //oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
 
+/*
+oauth.setKeys('PUBLICKEY','PRIVATEKEY');
+oauth.setCallback('https://YOURHEROKUDOMAIN/token','YOURCALLBACKPAGE');
+*/
+
 var port = process.env.PORT || 3000;
 
 
