@@ -11,39 +11,6 @@ var rest = require('./rest');
 
 
 
-//oauth.setKeys('3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt','5722795279005913741');
-//oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
-
-//oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
-
-if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL	
-	
-	oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsJuDybl0FnixTUBQGNd2yoImP4jeEyXO4wM1MnqRJM90uUbKt_WbfHRKC3i4','5193150984836344435');
-	oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
-	
-	http = require('https');
-	var options = {
-  		key: fs.readFileSync('../privatekey.pem'),
-  		cert: fs.readFileSync('../certificate.pem')
-	};
-	console.log('SSL Configured');
-	
-	server = http.createServer(options,RESTHandler);
-} else {
-	
-	oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7','6924647006748897156');
-	oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
-
-	
-	http = require('http');
-	server = http.createServer(RESTHandler);
-	console.log('HTTP Configured');
-	
-	
-} 
-
-
-/*
 Recommend two Remote Access configurations, one for local and one for Heroku.  This will allow you to swap between the 
 two without changes.  Just test locally and then git to Heroku when ready to deploy (in theory)
 
@@ -75,7 +42,7 @@ if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku,
 	
 	
 }
-*/
+
 
   
 server.listen(port);
