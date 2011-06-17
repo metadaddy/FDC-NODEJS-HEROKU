@@ -9,10 +9,8 @@ var port = process.env.PORT || 3000;
 var oauth = require('./oauth');
 var rest = require('./rest');
 
-
-
-Recommend two Remote Access configurations, one for local and one for Heroku.  This will allow you to swap between the 
-two without changes.  Just test locally and then git to Heroku when ready to deploy (in theory)
+//Recommend two Remote Access configurations, one for local and one for Heroku.  This will allow you to swap between the 
+//two without changes.  Just test locally and then git to Heroku when ready to deploy (in theory)
 
 
 if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL
