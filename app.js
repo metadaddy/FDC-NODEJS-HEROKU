@@ -10,32 +10,16 @@ var oauth = require('./oauth');
 var rest = require('./rest');
 
 
-/*
-oauth.setKeys('PUBLICKEY','PRIVATEKEY');
-oauth.setCallback('https://YOURDOMAIN/token','YOURCALLBACKPAGE');
-*/
 
 //oauth.setKeys('3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt','5722795279005913741');
 //oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
 
 //oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
 
-
-/*
-Recommend two Remote Access configurations, one for local and one for Heroku.  This will allow you to swap between the 
-two without changes.  Just test locally and then git to Heroku when ready to deploy (in theory)
-*/
-
-if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL
-	/*
-		This info is out of date when referring to HTTPS, but the cert gen is the same:
-		http://www.silassewell.com/blog/2010/06/03/node-js-https-ssl-server-example/
-	*/
-	
+if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL	
 	
 	oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsJuDybl0FnixTUBQGNd2yoImP4jeEyXO4wM1MnqRJM90uUbKt_WbfHRKC3i4','5193150984836344435');
 	oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
-
 	
 	http = require('https');
 	var options = {
@@ -56,7 +40,43 @@ if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku,
 	console.log('HTTP Configured');
 	
 	
+} 
+
+
+/*
+Recommend two Remote Access configurations, one for local and one for Heroku.  This will allow you to swap between the 
+two without changes.  Just test locally and then git to Heroku when ready to deploy (in theory)
+
+
+if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL
+	// This info is out of date when referring to HTTPS, but the cert gen is the same: http://www.silassewell.com/blog/2010/06/03/node-js-https-ssl-server-example/
+	
+	oauth.setKeys('{LOCALPUBLICKEY}','{LOCALSECRETKEY}');
+	oauth.setCallback('https://{LOCALDOMAIN}/token','views/{LOCALSTART}.html');
+
+	
+	http = require('https');
+	var options = { //sample cert setup
+  		key: fs.readFileSync('../privatekey.pem'),
+  		cert: fs.readFileSync('../certificate.pem')
+	};
+	console.log('SSL Configured');
+	
+	server = http.createServer(options,RESTHandler);
+} else {
+	
+	oauth.setKeys('{REMOTEPUBLICKEY}','{REMOTEPRIVATEKE}');
+	oauth.setCallback('https://{HEROKUDOMAIN}/token','views/{REMOTESTART}.html');
+
+	
+	http = require('http');
+	server = http.createServer(RESTHandler);
+	console.log('HTTP Configured');
+	
+	
 }
+*/
+
   
 server.listen(port);
 console.log('REST Listening on '+port);
