@@ -9,19 +9,34 @@ var port = process.env.PORT || 3000;
 var oauth = require('./oauth');
 var rest = require('./rest');
 
+
+/*
+oauth.setKeys('PUBLICKEY','PRIVATEKEY');
+oauth.setCallback('https://YOURDOMAIN/token','YOURCALLBACKPAGE');
+*/
+
 //oauth.setKeys('3MVG9lKcPoNINVBJ9Kz1a5dKMW.uUZ0wD5Lx_DLSHY9ynsB5w1RwfOjItSZuYCgbB0%2EXtU4cwbXpeMOGvI%2EIt','5722795279005913741');
-oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7','6924647006748897156');
-oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
 //oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
 
 //oauth.setHost('https://prerellogin.pre.salesforce.com/services/oauth2/authorize','prerellogin.pre.salesforce.com');
 
+
 /*
-oauth.setKeys('PUBLICKEY','PRIVATEKEY');
-oauth.setCallback('https://YOURHEROKUDOMAIN/token','YOURCALLBACKPAGE');
+Recommend two Remote Access configurations, one for local and one for Heroku.  This will allow you to swap between the 
+two without changes.  Just test locally and then git to Heroku when ready to deploy (in theory)
 */
 
 if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL
+	/*
+		This info is out of date when referring to HTTPS, but the cert gen is the same:
+		http://www.silassewell.com/blog/2010/06/03/node-js-https-ssl-server-example/
+	*/
+	
+	
+	oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsJuDybl0FnixTUBQGNd2yoImP4jeEyXO4wM1MnqRJM90uUbKt_WbfHRKC3i4','5193150984836344435');
+	oauth.setCallback('https://chicago.local:3000/token','views/filter.html');
+
+	
 	http = require('https');
 	var options = {
   		key: fs.readFileSync('../privatekey.pem'),
@@ -31,16 +46,20 @@ if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku,
 	
 	server = http.createServer(options,RESTHandler);
 } else {
+	
+	oauth.setKeys('3MVG9zeKbAVObYjPJixRj0EVnsIqnE1L8Zx7s2siPLbhdLlb892mzb6U0TifZaChqzghmrf00RUX3M8VSLIT7','6924647006748897156');
+	oauth.setCallback('https://smooth-dawn-328.herokuapp.com/token','views/filter.html');
+
+	
 	http = require('http');
 	server = http.createServer(RESTHandler);
 	console.log('HTTP Configured');
+	
+	
 }
   
 server.listen(port);
 console.log('REST Listening on '+port);
-
-
-
 
 //RESTful API router
 function RESTHandler (req, res) {
@@ -88,30 +107,34 @@ function RESTHandler (req, res) {
   
   } else if(req.url.indexOf('/get') >= 0) {
    	
+   	console.log("Getting :: "+query.id);
   	rest.getObjectById(query.id,query.type,oauth.getOAuth().access_token,res);	
   		
   } else if(req.url.indexOf('/query') >= 0) {
    	
+  	console.log("Query :: "+query.q);
   	rest.query(query.q,oauth.getOAuth().access_token,res);
   
   } else if(req.url.indexOf('/update') >= 0) {
    	
-   	console.log(query);
-   	rest.update(query.o,query.id,query.type,oauth.getOAuth().access_token,res);
+   	console.log("Updating :: "+query.id);
+  	rest.update(query.o,query.id,query.type,oauth.getOAuth().access_token,res);
   
   } else if(req.url.indexOf('/create') >= 0) {
    	
+   	console.log("Creating :: "+query.type);
   	rest.create(query.o,query.type,oauth.getOAuth().access_token,res);
   
   } else if(req.url.indexOf('/delete') >= 0) {
    	
+   	console.log("Deleting :: "+query.id);
   	rest.deleteObject(query.id,query.type,oauth.getOAuth().access_token,res);
-  
   
   } else if(req.url.indexOf('/execute/') >= 0) {
    	
    	restData = req.url.split('/execute/')[1];
    	restData = restData.split('/');
+   	console.log("Custom Apex Execute :: "+restData[0]+"."+restData[1]);
    	
   	rest.execute(restData[0],restData[1],unescape(restData[2]),oauth.getOAuth().access_token,res);
   
