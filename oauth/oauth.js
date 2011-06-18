@@ -28,9 +28,9 @@ function getLoginUrl() {
 	return oauthURL;
 }
 
-function setKeys(public,private) {
-	publicKey = public;
-	privateKey = private;
+function setKeys(pubKey,privKey) {
+	publicKey = pubKey;
+	privateKey = privKey;
 	setHost(oauthPrefix,hostname);
 	console.log(oauthURL);
 }
@@ -93,7 +93,7 @@ function getAccessToken(token) {
 			'Accept':'application/jsonrequest',
 			'Cache-Control':'no-cache,no-store,must-revalidate'
 		}
-	}
+	};
 	
 	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
@@ -110,7 +110,7 @@ function getAccessToken(token) {
 		
 		}).on('error', function(e) {
 		  console.error(e);
-		})
+		});
 	
 	req.write(post_data);
 	req.end();
@@ -137,7 +137,7 @@ function getRefreshTokenToken(token) {
 			'Accept':'application/jsonrequest',
 			'Cache-Control':'no-cache,no-store,must-revalidate'
 		}
-	}
+	};
 	
 	var req = http.request(options, function(res) {
 		  console.log("statusCode: ", res.statusCode);
@@ -155,7 +155,7 @@ function getRefreshTokenToken(token) {
 		
 		}).on('error', function(e) {
 		  console.error(e);
-		})
+		});
 	
 	req.write(post_data);
 	req.end();
