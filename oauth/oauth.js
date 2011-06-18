@@ -1,8 +1,6 @@
 var http = require('https');
 var fs = require('fs');
 
-var res;
-
 var publicKey = '';
 var privateKey = '';
 
@@ -52,15 +50,14 @@ function setHost(oauth,host) {
 }
 
 
-function getRequestToken(url,_res) {
-	res = _res;
+function getRequestToken(url, res) {
 	var tokenURL = unescape(url);
 	requestToken = escape(tokenURL.substring(tokenURL.indexOf("code=")+5,tokenURL.length));
 	console.log('Request Token:::'+requestToken);
-	getAccessToken(requestToken);
+	getAccessToken(requestToken, res);
 }
 
-function redirectUser() {
+function redirectUser(res) {
 	console.log('RESPONSE:::'+oauthResponse);
 	console.log('RESPONSE:::'+oauthResponse.access_token);
 	console.log('RESPONSE:::'+oauthResponse.refresh_token);
@@ -73,7 +70,7 @@ function redirectUser() {
 }	
 
 
-function getAccessToken(token) {
+function getAccessToken(token, clientResonse) {
 	console.log('Getting Access Token for '+token);
 	
 	var post_data = 'code='+token+'&grant_type=authorization_code&client_id='+publicKey+'&redirect_uri='+escape(callbackURI)+'&client_secret='+privateKey;
@@ -105,7 +102,7 @@ function getAccessToken(token) {
 		 	});
 		
 		  res.on('end', function(d) {
-		  	redirectUser();
+		  	redirectUser(clientResonse);
 		  	});
 		
 		}).on('error', function(e) {
@@ -117,7 +114,7 @@ function getAccessToken(token) {
 		
 	}
 	
-function getRefreshTokenToken(token) {
+function getRefreshTokenToken(token, clientResponse) {
 	console.log('Getting Access Token for '+token);
 	
 	var post_data = 'refresh_token='+token+'&grant_type=authorization_code&client_id='+publicKey+'&redirect_uri='+escape(callbackURI)+'&client_secret='+privateKey;
@@ -150,7 +147,7 @@ function getRefreshTokenToken(token) {
 		 	});
 		
 		  res.on('end', function(d) {
-		  	redirectUser();
+		  	redirectUser(clientResponse);
 		  	});
 		
 		}).on('error', function(e) {
