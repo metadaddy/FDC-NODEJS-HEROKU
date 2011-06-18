@@ -22,8 +22,8 @@ if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku,
 	
 	http = require('https');
 	var options = { //sample cert setup
-  		key: fs.readFileSync('../privatekey.pem'),
-  		cert: fs.readFileSync('../certificate.pem')
+  		key: fs.readFileSync('../privatekey.pem').toString(),
+  		cert: fs.readFileSync('../certificate.pem').toString()
 	};
 	console.log('SSL Configured');
 	
