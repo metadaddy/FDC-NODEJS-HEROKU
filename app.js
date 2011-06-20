@@ -15,7 +15,7 @@ var rest = require('./rest');
 // Just test locally and then git to Heroku when ready to deploy (in theory)
 
 oauth.setKeys(process.env.CLIENT_ID,process.env.CLIENT_SECRET);
-oauth.setCallback('https://'+process.env.APP_DOMAIN+'/token','views/process.env.START_PAGE.html');
+oauth.setCallback('https://'+process.env.APP_DOMAIN+'/token','views/'+process.env.START_PAGE+'.html');
 
 if(typeof(process.env.PORT) == 'undefined') {  //you are probably not on Heroku, setup your own SSL
 	// This info is out of date when referring to HTTPS, but the cert gen is the same: http://www.silassewell.com/blog/2010/06/03/node-js-https-ssl-server-example/
